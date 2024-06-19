@@ -25581,8 +25581,33 @@ new DataTable('#example', {
 		{
                     extend: 'print',
                     text: 'Print current page',
-                    footer: false
+                    footer: false,
+					customize: function(doc)
+            {
+				doc.pageMargins = [ 80, 80, 80, 80 ];
+                var last = null;
+                var current = null;
+                var bod = [];
+ 
+                var css = '@page { size: landscape; }',
+                    head = doc.document.head || doc.document.getElementsByTagName('head')[0],
+                    style = doc.document.createElement('style');
+ 
+                style.type = 'text/css';
+                style.media = 'print';
+ 
+                if (style.styleSheet)
+                {
+                  style.styleSheet.cssText = css;
                 }
+                else
+                {
+                  style.appendChild(doc.document.createTextNode(css));
+                }
+ 
+                head.appendChild(style);
+         }
+      },
     ],
 	paging: true,
     initComplete: function () {
