@@ -25598,7 +25598,7 @@ new DataTable('#example', {
 	paging: true,
     initComplete: function () {
         this.api()
-            .columns()
+            .columns([0, 1, 2, 3, 4])
             .every(function () {
                 let column = this;
 				
