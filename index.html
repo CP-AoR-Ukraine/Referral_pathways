@@ -12,9 +12,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-2.0.8/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/datatables.min.js"></script>
+<script src= "buttons.print.js"></script>
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/dataTables.bootstrap5.css" rel="stylesheet">
+
 
 
 
@@ -25580,34 +25580,20 @@ new DataTable('#example', {
         'excel',
 		{
                     extend: 'print',
-                    text: 'Print current page',
+					title: '',
+					exportOptions: {
+                        stripHtml : false,
+                        columns: [0, 1, 4, 5, 6, 7]  
+                    },
+                    text: 'Print current table',
                     footer: false,
-					customize: function(doc)
-            {
-				doc.pageMargins = [ 80, 80, 80, 80 ];
-                var last = null;
-                var current = null;
-                var bod = [];
- 
-                var css = '@page { size: landscape; }',
-                    head = doc.document.head || doc.document.getElementsByTagName('head')[0],
-                    style = doc.document.createElement('style');
- 
-                style.type = 'text/css';
-                style.media = 'print';
- 
-                if (style.styleSheet)
-                {
-                  style.styleSheet.cssText = css;
+					repeatingHead: {
+                    logo: 'https://github.com/CP-AoR-Ukraine/Referral_pathways/blob/main/img/CP%20AoR%20Ukraine.png?raw=true',
+                    logoPosition: 'right',
+                    logoStyle: 'padding:10px;width: 188px; height: 136px;',
+                    title: '<h3>Referral pathways</h3>'
                 }
-                else
-                {
-                  style.appendChild(doc.document.createTextNode(css));
                 }
- 
-                head.appendChild(style);
-         }
-      },
     ],
 	paging: true,
     initComplete: function () {
